@@ -20,7 +20,7 @@ echo ""
 spinner() {
     local pid=$!
     local delay=0.1
-    local spinstr='.....'
+    local spinstr='|/-\'
     while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
         local temp=${spinstr#?}
         printf " [%c]  " "$spinstr"
@@ -57,3 +57,13 @@ while true; do
         break
     fi
 done
+
+echo ""
+read -p "Would you like to provide feedback on your experience? (yes/no): " feedback
+if [ "$feedback" == "yes" ]; then
+    read -p "Please enter your feedback: " user_feedback
+    echo -e "\nThank you for your feedback!"
+    echo "Feedback: $user_feedback" >> feedback.txt
+else
+    echo -e "\nThank you for using LIVE SUBDOMAINS FINDER!"
+fi
